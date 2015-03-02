@@ -101,8 +101,8 @@ def CreateTargets():
         bpy.context.object.data.name = "ME_"+img.name
     
         bpy.context.object.data.materials.append(mat)
-        #bpy.context.object.name = "OB_"+img.name
         bpy.context.object.name = img.name
+        bpy.context.object.rotation_mode ='AXIS_ANGLE'
         bpy.context.object.scale = (img.x/2000, img.y/2000, 1.0)
         bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
         bpy.context.object.lock_scale = (True, True, True)
@@ -150,10 +150,8 @@ def SaveTargets():
 
 def TransformTargets():
     for p in Parts:
-        #obj = bpy.data.objects["OB_"+p.name]
         obj = bpy.data.objects[p.name]
         obj.location = Vector((p.translation))/1000
-        obj.rotation_mode ='AXIS_ANGLE'
         obj.rotation_axis_angle[0] = pi*p.rotation[3]/180
         obj.rotation_axis_angle[1] = p.rotation[0]
         obj.rotation_axis_angle[2] = p.rotation[1]
